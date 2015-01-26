@@ -127,7 +127,12 @@ class Receipt < ActiveRecord::Base
 
 
   protected
-
+def update_conv
+  unless self.conversation.nil?
+    self.conversation.touch
+  end
+  
+end
   #Removes the duplicate error about not present subject from Conversation if it has been already
   #raised by Message
   def remove_duplicate_errors
