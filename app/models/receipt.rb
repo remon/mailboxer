@@ -27,6 +27,8 @@ class Receipt < ActiveRecord::Base
   scope :is_unread, lambda { where(:is_read => false) }
 
   after_validation :remove_duplicate_errors
+  after_commit :update_conv
+  
   class << self
     #Marks all the receipts from the relation as read
     def mark_as_read(options={})
